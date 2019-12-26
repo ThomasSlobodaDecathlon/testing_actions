@@ -1,0 +1,17 @@
+name: Push
+
+on: push
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: ESlint
+      run: npm run eslint
+    - name: Test
+      run: npm run test
+    - name: Transpile
+      run: npm run build
