@@ -1,0 +1,31 @@
+{
+  "name": "testing_actions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./lib/index.js",
+  "scripts": {
+    "build": "rollup src/index.js --file ./lib/index.js --format cjs",
+    "eslint": "eslint src --fix",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThomasSlobodaDecathlon/testing_actions.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ThomasSlobodaDecathlon/testing_actions/issues"
+  },
+  "homepage": "https://github.com/ThomasSlobodaDecathlon/testing_actions#readme",
+  "devDependencies": {
+    "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
+    "@types/jest": "^24.0.24",
+    "babel-jest": "^24.9.0",
+    "eslint": "^6.8.0",
+    "jest": "^24.9.0",
+    "rollup": "^1.27.14"
+  }
+}
