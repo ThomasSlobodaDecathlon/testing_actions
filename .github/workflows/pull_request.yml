@@ -1,0 +1,36 @@
+name: Pull request
+
+on: pull_request
+
+jobs:
+
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install
+      run: npm install
+    - name: Transpile
+      run: npm run build
+    - name: Slack notification Failure
+      uses: Ilshidur/action-slack@f37693b4e0589604815219454efd5cb9b404fb85
+      if: failure()
+      env:
+        SLACK_CHANNEL: general
+        SLACK_OVERRIDE_MESSAGE: "true"
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_USERNAME: GitBot
+      with:
+        args: ":x: La pull request *{{ EVENT_PAYLOAD.pull_request.title }}* créée par *{{EVENT_PAYLOAD.pull_request.user.login}}* a échoué. Lien: {{ EVENT_PAYLOAD.pull_request.html_url }}."
+    - name: Slack notification Success
+      uses: Ilshidur/action-slack@f37693b4e0589604815219454efd5cb9b404fb85
+      if: success()
+      env:
+        SLACK_CHANNEL: general
+        SLACK_OVERRIDE_MESSAGE: "true"
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_USERNAME: GitBot
+      with:
+        args: ":white_check_mark: La pull request *{{ EVENT_PAYLOAD.pull_request.title }}* créée par *{{EVENT_PAYLOAD.pull_request.user.login}}* est prête. Lien: {{ EVENT_PAYLOAD.pull_request.html_url }}."
+
